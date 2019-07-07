@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { HomeIcon, PeopleIcon, Statistics, StatisticsIcon } from "./Icons";
+import { Link } from "react-router-dom";
+import { HomeIcon, PeopleIcon, StatisticsIcon } from "./Icons";
 
 const Sidebar = styled.nav`
   left: 0px;
@@ -10,20 +11,27 @@ const Sidebar = styled.nav`
   height: 100%;
   padding-top: 90px;
   width: 80px;
-  z-index: 1500;
+  z-index: 10;
   border-right: 0.5px solid rgb(224, 224, 224);
   display: flex;
   flex-direction: column;
   align-items: center;
   svg {
+    cursor: pointer;
     margin-bottom: 50px;
   }
 `;
 
 export default () => (
   <Sidebar>
-    <HomeIcon />
-    <StatisticsIcon />
-    <PeopleIcon />
+    <Link to="/">
+      <HomeIcon />
+    </Link>
+    <Link to="/statistics">
+      <StatisticsIcon />
+    </Link>
+    <Link to="/manage">
+      <PeopleIcon />
+    </Link>
   </Sidebar>
 );

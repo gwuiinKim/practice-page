@@ -6,23 +6,21 @@ import {
   Redirect
 } from "react-router-dom";
 import PropTypes from "prop-types";
+import Home from "../Routes/Home";
+import Sidebar from "./Sidebar";
+import routes from "../Routes/routes";
+import Statistics from "../Routes/Statistics";
+import Manage from "../Routes/Manage";
 
 const AppRouter = ({ isLoggedIn }) => (
   <Router>
-    {!isLoggedIn && (
-      <>
-        <Switch>
-          <Route path="/" exact component={Main} />
-          <Route path="/start" component={Start} />
-        </Switch>
-      </>
-    )}
-
     {isLoggedIn && (
       <>
+        <Sidebar />
         <Switch>
           <Route path="/" exact component={Home} />
-
+          <Route path="/statistics" exact component={Statistics} />
+          <Route path="/manage" exact component={Manage} />
           <Redirect from="*" to="/" />
         </Switch>
       </>
