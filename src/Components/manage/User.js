@@ -15,6 +15,7 @@ const Container = styled.li`
     background-color: ${props => props.theme.blueColor};
     color: white;
   }
+  ${props => props.theme.boxShadow}
 `;
 
 const Content = styled.span`

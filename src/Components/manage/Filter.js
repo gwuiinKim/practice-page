@@ -8,6 +8,7 @@ const Container = styled.div`
   background-color: white;
   border-radius: 10px;
   padding: 20px 40px;
+  ${props => props.theme.boxShadow}
 `;
 
 const Title = styled.h3`

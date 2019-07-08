@@ -17,7 +17,10 @@ export default {
   whiteBox: `border:${BOX_BORDER};
              border-radius:${BORDER_RADIUS};
              background-color:white;
-            `
+            `,
+  boxShadow: `-webkit-box-shadow: 1px 2px 6px 1px rgba(224,230,247,0.62);
+  -moz-box-shadow: 1px 2px 6px 1px rgba(224,230,247,0.62);
+  box-shadow: 1px 2px 6px 1px rgba(224,230,247,0.62);`
   // roundHeader: `
   // color:white;
   // font-weight:400;

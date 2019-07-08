@@ -7,7 +7,7 @@ export const userData = [
     isPt: "o",
     gender: "남",
     url:
-      "http://fpsc.gov.pk/sites/default/files/default_images/person-default.png"
+      "http://www.govbox.com.br/html/assets/base/img/content/avatars/team16.jpg"
   },
   {
     id: 2,

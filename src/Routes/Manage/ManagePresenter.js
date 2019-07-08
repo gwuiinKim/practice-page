@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import User from "../../Components/manage/User";
 import Filter from "../../Components/manage/Filter";
+import UserDetail from "../../Components/manage/UserDetail";
 
 const Container = styled.div`
   padding-top: 80px;
@@ -26,7 +27,15 @@ const UserTitle = styled.h1`
 
 const UserWrapper = styled.ul``;
 
-const ManagePresenter = ({ loading, data, handleUserClick }) => {
+const ManagePresenter = ({
+  loading,
+  data,
+  action,
+  userDetail,
+  handleUserClick
+}) => {
+  const { isDetail, isRegister, isEdit } = action;
+
   return (
     <Container>
       <Column>
@@ -45,6 +54,9 @@ const ManagePresenter = ({ loading, data, handleUserClick }) => {
       </Column>
       <Column>
         <Filter />
+        {!loading && isDetail && userDetail !== {} && (
+          <UserDetail userDetail={userDetail} />
+        )}
       </Column>
     </Container>
   );
