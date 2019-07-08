@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { userData } from "../data";
-import User from "../Components/manage/User";
+import User from "../../Components/manage/User";
+import Filter from "../../Components/manage/Filter";
 
 const Container = styled.div`
   padding-top: 80px;
@@ -11,6 +11,7 @@ const Container = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 2fr 1fr;
+  grid-gap: 50px;
 `;
 
 const Column = styled.div`
@@ -25,15 +26,7 @@ const UserTitle = styled.h1`
 
 const UserWrapper = styled.ul``;
 
-export default () => {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setData(userData);
-    setLoading(false);
-  }, []);
-
+const ManagePresenter = ({ loading, data, handleUserClick }) => {
   return (
     <Container>
       <Column>
@@ -41,12 +34,20 @@ export default () => {
         {!loading && data && data.length > 0 && (
           <UserWrapper>
             {data.map(user => (
-              <User key={user.id} user={user} />
+              <User
+                handleUserClick={handleUserClick}
+                key={user.id}
+                user={user}
+              />
             ))}
           </UserWrapper>
         )}
       </Column>
-      <Column />
+      <Column>
+        <Filter />
+      </Column>
     </Container>
   );
 };
+
+export default ManagePresenter;

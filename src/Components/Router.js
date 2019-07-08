@@ -8,7 +8,6 @@ import {
 import PropTypes from "prop-types";
 import Home from "../Routes/Home";
 import Sidebar from "./Sidebar";
-import routes from "../Routes/routes";
 import Statistics from "../Routes/Statistics";
 import Manage from "../Routes/Manage";
 

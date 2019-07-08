@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.li`
+  cursor: pointer;
   background-color: white;
   margin-bottom: 20px;
   font-size: 17px;
@@ -10,15 +11,21 @@ const Container = styled.li`
   display: grid;
   grid-template-columns: repeat(5, minmax(max-content, 1fr));
   place-items: center;
+  &:hover {
+    background-color: ${props => props.theme.blueColor};
+    color: white;
+  }
 `;
 
-const Content = styled.span``;
+const Content = styled.span`
+  user-select: none;
+`;
 
-export default ({ user }) => {
+export default ({ user, handleUserClick }) => {
   const { name, phoneNumber, gender, isPt, membership, id } = user;
 
   return (
-    <Container id={id}>
+    <Container id={id} onClick={handleUserClick}>
       <Content>{name}</Content>
       <Content>{gender}</Content>
       <Content>{isPt}</Content>
