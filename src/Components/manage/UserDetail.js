@@ -14,32 +14,89 @@ const Container = styled.div`
 `;
 const Column = styled.div`
   width: 100%;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: auto;
+  :nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  :nth-child(2) {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 0.5px solid rgb(224, 224, 224);
+  }
 `;
 
 const Img = styled.img`
   width: 150px;
   height: auto;
-  border-radius: 20px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+`;
+
+const Name = styled.span`
+  font-size: 20px;
+  margin-bottom: 25px;
 `;
 
 const Button = styled.button`
   all: unset;
+  color: white;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 5px;
+  background-color: #2e5bff;
+`;
+
+const CategoryWrapper = styled.div`
+  margin-bottom: 40px;
+`;
+
+const Cateogry = styled.p`
+  color: ${props => props.theme.darkGreyColor};
+  font-size: 18px;
+`;
+
+const Content = styled.p`
+  margin-top: 15px;
+  color: black;
+  opacity: 1;
+  font-size: 18px;
 `;
 
 const UserDetail = ({ userDetail }) => {
-  const { id, name, url, isPt, phoneNumber, membership } = userDetail[0];
+  const {
+    id,
+    name,
+    gender,
+    url,
+    isPt,
+    phoneNumber,
+    membership
+  } = userDetail[0];
 
   return (
     <Container>
       <Column>
         <Img src={url} />
+        <Name>{name}</Name>
         <Button>수정하기</Button>
       </Column>
-      <Column />
+      <Column>
+        <CategoryWrapper>
+          <Cateogry>membership</Cateogry>
+          <Content>{membership}</Content>
+        </CategoryWrapper>
+        <CategoryWrapper>
+          <Cateogry>phoneNumber</Cateogry>
+          <Content>{phoneNumber}</Content>
+        </CategoryWrapper>
+        <CategoryWrapper>
+          <Cateogry>gender</Cateogry>
+          <Content>{gender}</Content>
+        </CategoryWrapper>
+      </Column>
     </Container>
   );
 };
