@@ -3,6 +3,7 @@ import styled from "styled-components";
 import User from "../../Components/manage/User";
 import Filter from "../../Components/manage/Filter";
 import UserDetail from "../../Components/manage/UserDetail";
+import Register from "../../Components/manage/Register";
 
 const Container = styled.div`
   padding-top: 80px;
@@ -24,7 +25,11 @@ const HeaderWrapper = styled.div`
   width: 100%;
   margin-bottom: 40px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  div {
+    height: 100%;
+  }
 `;
 const UserTitle = styled.h1`
   font-size: 25px;
@@ -43,11 +48,14 @@ const Button = styled.button`
   all: unset;
   cursor: pointer;
   color: white;
-  padding: 5px 20px;
+  padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
   border-radius: 5px;
   background-color: #2e5bff;
+  &:nth-child(1) {
+    margin-right: 10px;
+  }
 `;
 
 const UserWrapper = styled.ul``;
@@ -58,8 +66,12 @@ const ManagePresenter = ({
   action,
   search,
   userDetail,
+  name,
+  gender,
+  phoneNumber,
   handleUserClick,
-  handleFilterClick
+  handleFilterClick,
+  handleRegisterClick
 }) => {
   const { isDetail, isRegister, isEdit } = action;
 
@@ -73,7 +85,10 @@ const ManagePresenter = ({
             value={search.value}
             onChange={search.onChange}
           />
-          <Button onClick={handleFilterClick}>Filter</Button>
+          <div>
+            <Button onClick={handleRegisterClick}>New</Button>
+            <Button onClick={handleFilterClick}>Filter</Button>
+          </div>
         </HeaderWrapper>
         {!loading && data && data.length > 0 && (
           <UserWrapper>
@@ -91,6 +106,9 @@ const ManagePresenter = ({
         <Filter />
         {!loading && isDetail && userDetail !== {} && (
           <UserDetail userDetail={userDetail} />
+        )}
+        {!loading && isRegister && (
+          <Register name={name} gender={gender} phoneNumber={phoneNumber} />
         )}
       </Column>
     </Container>

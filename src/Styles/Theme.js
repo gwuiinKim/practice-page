@@ -21,7 +21,9 @@ export default {
   boxShadow: `-webkit-box-shadow: 1px 2px 6px 1px rgba(224,230,247,0.62);
   -moz-box-shadow: 1px 2px 6px 1px rgba(224,230,247,0.62);
   box-shadow: 1px 2px 6px 1px rgba(224,230,247,0.62);`,
-  border: `0.5px solid rgb(224, 224, 224)`
+  border: `0.5px solid rgb(224, 224, 224)`,
+  blueBorder: `1px solid #e0e6f7;
+  `
   // roundHeader: `
   // color:white;
   // font-weight:400;

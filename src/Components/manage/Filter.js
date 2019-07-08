@@ -19,10 +19,10 @@ const Title = styled.h3`
 const Filter = styled.input`
   all: unset;
   width: 100%;
-  border: 1px solid #e0e6f7;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 10px 0px;
+  ${props => props.theme.blueBorder}
 `;
 
 export default () => (
