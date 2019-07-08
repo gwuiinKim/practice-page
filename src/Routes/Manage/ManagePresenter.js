@@ -4,6 +4,7 @@ import User from "../../Components/manage/User";
 import Filter from "../../Components/manage/Filter";
 import UserDetail from "../../Components/manage/UserDetail";
 import Register from "../../Components/manage/Register";
+import Edit from "../../Components/manage/Edit";
 
 const Container = styled.div`
   padding-top: 80px;
@@ -71,6 +72,7 @@ const ManagePresenter = ({
   phoneNumber,
   handleUserClick,
   handleFilterClick,
+  handleModifyClick,
   handleRegisterClick
 }) => {
   const { isDetail, isRegister, isEdit } = action;
@@ -105,11 +107,28 @@ const ManagePresenter = ({
       <Column>
         <Filter />
         {!loading && isDetail && userDetail !== {} && (
-          <UserDetail userDetail={userDetail} />
+          <UserDetail
+            userDetail={userDetail}
+            handleModifyClick={handleModifyClick}
+          />
         )}
         {!loading && isRegister && (
-          <Register name={name} gender={gender} phoneNumber={phoneNumber} />
+          <Register
+            name={name}
+            gender={gender}
+            phoneNumber={phoneNumber}
+            isEdit={isEdit}
+            userDetail={userDetail}
+          />
         )}
+        {/* {!loading && isEdit && (
+          <Edit
+            name={name}
+            gender={gender}
+            phoneNumber={phoneNumber}
+            userDetail={userDetail}
+          />
+        )} */}
       </Column>
     </Container>
   );

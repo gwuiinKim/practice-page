@@ -46,14 +46,13 @@ const Wrapper = styled.div`
 const Img = styled.img`
   width: 150px;
   height: auto;
-  border-radius: 30px;
+  border-radius: 20px;
   margin-bottom: 20px;
 `;
 
 const Button = styled.button`
   all: unset;
   color: white;
-  cursor: pointer;
   padding: 10px 20px;
   font-size: 15px;
   font-weight: 500;
@@ -78,26 +77,13 @@ const Input = styled.input`
   border: ${props => props.theme.blueBorder};
 `;
 
-const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
-  // const {
-  //   name: aName,
-  //   url: aUrl,
-  //   gender: aGender,
-  //   phoneNumber: aPhoneNumber,
-  //   membership: aMembership
-  // } = userDetail[0];
-
-  // 할일
-  // input required 자바스크립트코드
-  // button 제출 event handler
-  // 사진 찍기
-
+const Edit = ({ name, gender, phoneNumber }) => {
   return (
     <Container>
       <Column>
         <Wrapper>
           <Img src={require("../../assets/Default.png")} />
-          <Button>{isEdit ? "사진변경" : "사진추가"}</Button>
+          <Button>사진추가</Button>
         </Wrapper>
         <Wrapper>
           <Info>*표시는 필수 입력 항목입니다.</Info>
@@ -106,7 +92,6 @@ const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
             placeholder="이름"
             value={name.value}
             onChange={name.onChange}
-            required
           />
         </Wrapper>
         <Wrapper>
@@ -141,4 +126,4 @@ const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
   );
 };
 
-export default UserDetail;
+export default Edit;

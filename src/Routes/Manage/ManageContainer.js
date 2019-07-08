@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { userData } from "../../data";
 import ManagePresenter from "./ManagePresenter";
 import useInput from "../../Hooks/useInput";
-import { useRegister } from "../../Context/RegisterContext";
 
 export default () => {
   const [data, setData] = useState();
@@ -10,14 +9,16 @@ export default () => {
   const [loading, setLoading] = useState(true);
   const [action, setAction] = useState({
     isDetail: false,
-    isRegister: true,
+    isRegister: false,
     isEdit: false,
     isFilter: true
   });
   const search = useInput();
-  const name = useInput();
+
+  const name = useInput("");
   const gender = useInput();
   const phoneNumber = useInput();
+
   const handleFilterClick = e => {
     setAction({
       isFilter: true
@@ -27,6 +28,15 @@ export default () => {
     setAction({
       isRegister: true
     });
+  };
+  const handleModifyClick = e => {
+    setAction({
+      isRegister: true,
+      isEdit: true
+    });
+    name.setValue(userDetail[0].name);
+    gender.setValue(userDetail[0].gender);
+    phoneNumber.setValue(userDetail[0].phoneNumber);
   };
   const handleUserClick = async e => {
     const {
@@ -60,6 +70,7 @@ export default () => {
       userDetail={userDetail}
       handleUserClick={handleUserClick}
       handleFilterClick={handleFilterClick}
+      handleModifyClick={handleModifyClick}
       handleRegisterClick={handleRegisterClick}
     />
   );

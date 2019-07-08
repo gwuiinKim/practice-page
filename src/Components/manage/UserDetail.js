@@ -42,6 +42,7 @@ const Name = styled.span`
 const Button = styled.button`
   all: unset;
   color: white;
+  cursor: pointer;
   padding: 10px 20px;
   font-size: 15px;
   font-weight: 500;
@@ -65,7 +66,7 @@ const Content = styled.p`
   font-size: 18px;
 `;
 
-const UserDetail = ({ userDetail }) => {
+const UserDetail = ({ userDetail, handleModifyClick }) => {
   const {
     id,
     name,
@@ -81,7 +82,7 @@ const UserDetail = ({ userDetail }) => {
       <Column>
         <Img src={url} />
         <Name>{name}</Name>
-        <Button>수정하기</Button>
+        <Button onClick={handleModifyClick}>수정하기</Button>
       </Column>
       <Column>
         <CategoryWrapper>
