@@ -12,7 +12,7 @@ const Sidebar = styled.nav`
   padding-top: 90px;
   width: 80px;
   z-index: 10;
-  border-right: 0.5px solid rgb(224, 224, 224);
+  border-right: ${props => props.theme.border};
   display: flex;
   flex-direction: column;
   align-items: center;

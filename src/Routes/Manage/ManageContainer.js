@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { userData } from "../../data";
 import ManagePresenter from "./ManagePresenter";
+import useInput from "../../Hooks/useInput";
 
 export default () => {
   const [data, setData] = useState();
   const [userDetail, setUserDetail] = useState([userData[0]]);
   const [loading, setLoading] = useState(true);
   const [action, setAction] = useState({
-    isDetail: true,
+    isDetail: false,
     isRegister: false,
     isEdit: false,
     isFilter: true
   });
-  const [clickOutside, setClickOutside] = useState();
-
+  const search = useInput();
+  const handleFilterClick = e => {
+    setAction({
+      isFilter: true
+    });
+  };
   const handleUserClick = async e => {
     const {
       currentTarget: { id }
@@ -39,8 +44,10 @@ export default () => {
       data={data}
       loading={loading}
       action={action}
+      search={search}
       userDetail={userDetail}
       handleUserClick={handleUserClick}
+      handleFilterClick={handleFilterClick}
     />
   );
 };
