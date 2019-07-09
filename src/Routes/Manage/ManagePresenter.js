@@ -4,7 +4,7 @@ import User from "../../Components/manage/User";
 import Filter from "../../Components/manage/Filter";
 import UserDetail from "../../Components/manage/UserDetail";
 import Register from "../../Components/manage/Register";
-import Edit from "../../Components/manage/Edit";
+import SearchForm from "../../Components/manage/SearchForm";
 
 const Container = styled.div`
   padding-top: 80px;
@@ -20,6 +20,7 @@ const Container = styled.div`
 const Column = styled.div`
   width: 100%;
   height: 80vh;
+  position: relative;
 `;
 
 const HeaderWrapper = styled.div`
@@ -54,9 +55,6 @@ const Button = styled.button`
   font-weight: 500;
   border-radius: 5px;
   background-color: #2e5bff;
-  &:nth-child(1) {
-    margin-right: 10px;
-  }
 `;
 
 const UserWrapper = styled.ul``;
@@ -78,59 +76,53 @@ const ManagePresenter = ({
   const { isDetail, isRegister, isEdit } = action;
 
   return (
-    <Container>
-      <Column>
-        <HeaderWrapper>
-          <UserTitle>User Dashboard</UserTitle>
-          <Search
-            placeholder="search.."
-            value={search.value}
-            onChange={search.onChange}
-          />
-          <div>
-            <Button onClick={handleRegisterClick}>New</Button>
-            <Button onClick={handleFilterClick}>Filter</Button>
-          </div>
-        </HeaderWrapper>
-        {!loading && data && data.length > 0 && (
-          <UserWrapper>
-            {data.map(user => (
-              <User
-                handleUserClick={handleUserClick}
-                key={user.id}
-                user={user}
-              />
-            ))}
-          </UserWrapper>
-        )}
-      </Column>
-      <Column>
-        <Filter />
-        {!loading && isDetail && userDetail !== {} && (
-          <UserDetail
-            userDetail={userDetail}
-            handleModifyClick={handleModifyClick}
-          />
-        )}
-        {!loading && isRegister && (
-          <Register
-            name={name}
-            gender={gender}
-            phoneNumber={phoneNumber}
-            isEdit={isEdit}
-            userDetail={userDetail}
-          />
-        )}
-        {/* {!loading && isEdit && (
-          <Edit
-            name={name}
-            gender={gender}
-            phoneNumber={phoneNumber}
-            userDetail={userDetail}
-          />
-        )} */}
-      </Column>
-    </Container>
+    <>
+      <SearchForm />
+      <Container>
+        <Column>
+          <HeaderWrapper>
+            <UserTitle>User Dashboard</UserTitle>
+            <Search
+              placeholder="search.."
+              value={search.value}
+              onChange={search.onChange}
+            />
+            <div>
+              <Button onClick={handleRegisterClick}>New</Button>
+            </div>
+          </HeaderWrapper>
+          {!loading && data && data.length > 0 && (
+            <UserWrapper>
+              {data.map(user => (
+                <User
+                  handleUserClick={handleUserClick}
+                  key={user.id}
+                  user={user}
+                />
+              ))}
+            </UserWrapper>
+          )}
+        </Column>
+        <Column>
+          <Filter />
+          {!loading && isDetail && userDetail !== {} && (
+            <UserDetail
+              userDetail={userDetail}
+              handleModifyClick={handleModifyClick}
+            />
+          )}
+          {!loading && isRegister && (
+            <Register
+              name={name}
+              gender={gender}
+              phoneNumber={phoneNumber}
+              isEdit={isEdit}
+              userDetail={userDetail}
+            />
+          )}
+        </Column>
+      </Container>
+    </>
   );
 };
 

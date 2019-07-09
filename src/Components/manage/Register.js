@@ -6,7 +6,7 @@ const Container = styled.div`
   top: 0;
   max-width: 400px;
   width: 100%;
-  height: 100%;
+  height: auto;
   background-color: white;
   border-radius: 10px;
   padding: 80px 40px;
@@ -79,13 +79,13 @@ const Input = styled.input`
 `;
 
 const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
-  // const {
-  //   name: aName,
-  //   url: aUrl,
-  //   gender: aGender,
-  //   phoneNumber: aPhoneNumber,
-  //   membership: aMembership
-  // } = userDetail[0];
+  const {
+    name: aName,
+    url: aUrl,
+    gender: aGender,
+    phoneNumber: aPhoneNumber,
+    membership: aMembership
+  } = userDetail[0];
 
   // 할일
   // input required 자바스크립트코드
@@ -96,7 +96,7 @@ const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
     <Container>
       <Column>
         <Wrapper>
-          <Img src={require("../../assets/Default.png")} />
+          <Img src={isEdit ? aUrl : require("../../assets/Default.png")} />
           <Button>{isEdit ? "사진변경" : "사진추가"}</Button>
         </Wrapper>
         <Wrapper>

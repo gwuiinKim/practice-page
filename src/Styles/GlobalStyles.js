@@ -12,7 +12,7 @@ export default createGlobalStyle`
         width:100%;
         height:100%;
         background-color:#f4f6fc;
-        color:#262626;
+        color:${props => props.theme.blackColor};
         font-size:18px;
         font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         @media screen and (max-width:768px) {   
@@ -20,7 +20,8 @@ export default createGlobalStyle`
         }
     }
     a {
-        color:#3897f0;
+        all:unset;
+        cursor:pointer;
         text-decoration:none;
     }
     input{
