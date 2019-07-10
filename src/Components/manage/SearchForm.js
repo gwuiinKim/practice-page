@@ -75,7 +75,16 @@ export default () => {
   };
   const list = ["유효", "만기예정", "만기"];
 
-  console.log(filter);
+  const handleDelete = e => {
+    const {
+      target: {
+        dataset: { value }
+      }
+    } = e;
+    const filtered = filter.filter(el => el !== value);
+    setFilter(filtered);
+  };
+
   return (
     <Container>
       <BlockContainer>
@@ -97,7 +106,7 @@ export default () => {
         </BlockWrapper>
         <Search />
       </BlockContainer>
-      <Filtered filter={filter} />
+      <Filtered filter={filter} handleDelete={handleDelete} />
     </Container>
   );
 };

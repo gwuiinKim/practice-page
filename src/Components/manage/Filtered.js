@@ -8,39 +8,43 @@ const Container = styled.div`
   color: black;
   border-radius: 5px;
   display: grid;
+  padding: 20px 30px;
   grid-template-columns: 1fr 5fr;
 `;
 
-const Element = styled.div`
-  padding: 10px;
-  display: flex;
-`;
-const ItemWrapper = styled.div`
+const Element = styled.div``;
+const ItemWrapper = styled.ul`
   font-size: 12px;
   :not(:last-child) {
     margin-right: 10px;
   }
+  display: flex;
 `;
 
-const Item = styled.span`
-  margin-right: 5px;
+const Item = styled.li`
+  margin-right: 20px;
 `;
 
 const Button = styled.button`
   all: unset;
   cursor: pointer;
+  margin-left: 5px;
 `;
 
-export default ({ filter }) => (
-  <Container>
-    <Element>전체 2000건</Element>
-    <Element>
-      {filter.map(el => (
-        <ItemWrapper>
-          <Item>{el}</Item>
-          <Button>x</Button>
-        </ItemWrapper>
-      ))}
-    </Element>
-  </Container>
-);
+export default ({ filter, handleDelete }) => {
+  return (
+    <Container>
+      <Element>전체 2000건</Element>
+      <ItemWrapper>
+        {filter.map(el => (
+          <Item>
+            {el}
+            <Button data-value={el} onClick={handleDelete}>
+              x
+            </Button>
+          </Item>
+        ))}
+      </ItemWrapper>
+    </Container>
+  );
+};
