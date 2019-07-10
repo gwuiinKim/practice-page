@@ -46,7 +46,7 @@ const List = styled.li`
   padding: 10px 20px;
   font-size: 15px;
   ${props =>
-    props.value !== "" &&
+    props.current &&
     `background-color:${props.theme.blueColor};
   color:white`}
 `;
@@ -65,6 +65,7 @@ export default () => {
       setFilter([...filter, innerText]);
     }
   };
+  const list = ["유효", "만기예정", "만기"];
 
   console.log(filter);
   return (
@@ -74,9 +75,11 @@ export default () => {
         <Block>
           <Title>회원분류</Title>
           <Wrapper>
-            <List onClick={onClick}>유효</List>
-            <List onClick={onClick}>만기예정</List>
-            <List onClick={onClick}>만기</List>
+            {list.map(el => (
+              <List onClick={onClick} current={filter.includes(el)}>
+                {el}
+              </List>
+            ))}
           </Wrapper>
         </Block>
         <Block />
