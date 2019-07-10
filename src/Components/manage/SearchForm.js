@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { userData } from "../../data";
+import Search from "./Search";
+import Filtered from "./Filtered";
 
 const Container = styled.div`
   width: 1250px;
@@ -16,15 +17,22 @@ const Container = styled.div`
 
 const BlockContainer = styled.div`
   width: 100%;
-  height: 350px;
+  height: 360px;
+  border: 0.5px solid #a9a9a9;
+  margin-bottom: 12px;
+`;
+
+const BlockWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 `;
 
 const Block = styled.div`
   width: 100%;
-  border: ${props => props.theme.border};
   height: 300px;
+  :not(:last-child) {
+    border-right: 0.5px solid #a9a9a9;
+  }
 `;
 
 const Title = styled.p`
@@ -71,21 +79,25 @@ export default () => {
   return (
     <Container>
       <BlockContainer>
-        <Block />
-        <Block>
-          <Title>회원분류</Title>
-          <Wrapper>
-            {list.map(el => (
-              <List onClick={onClick} current={filter.includes(el)}>
-                {el}
-              </List>
-            ))}
-          </Wrapper>
-        </Block>
-        <Block />
-        <Block />
-        <Block />
+        <BlockWrapper>
+          <Block />
+          <Block>
+            <Title> - 회원분류</Title>
+            <Wrapper>
+              {list.map(el => (
+                <List onClick={onClick} current={filter.includes(el)}>
+                  {el}
+                </List>
+              ))}
+            </Wrapper>
+          </Block>
+          <Block />
+          <Block />
+          <Block />
+        </BlockWrapper>
+        <Search />
       </BlockContainer>
+      <Filtered filter={filter} />
     </Container>
   );
 };
