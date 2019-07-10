@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import useFocus from "../../Hooks/useFocus";
+import { userData } from "../../data";
 
 const Container = styled.div`
   width: 1250px;
@@ -42,17 +42,31 @@ const Wrapper = styled.ul`
 const List = styled.li`
   all: unset;
   cursor: pointer;
+  user-select: none;
   padding: 10px 20px;
   font-size: 15px;
   ${props =>
-    props.focus &&
+    props.value !== "" &&
     `background-color:${props.theme.blueColor};
   color:white`}
 `;
 
 export default () => {
-  const { focus, onClick, value } = useFocus();
+  const [filter, setFilter] = useState([]);
 
+  const onClick = e => {
+    const {
+      target: { innerText }
+    } = e;
+    if (filter.includes(innerText)) {
+      const filtered = filter.filter(el => el !== innerText);
+      setFilter(filtered);
+    } else {
+      setFilter([...filter, innerText]);
+    }
+  };
+
+  console.log(filter);
   return (
     <Container>
       <BlockContainer>
@@ -60,15 +74,9 @@ export default () => {
         <Block>
           <Title>회원분류</Title>
           <Wrapper>
-            <List focus={focus} onClick={onClick}>
-              유효
-            </List>
-            <List focus={focus} onClick={onClick}>
-              만기예정
-            </List>
-            <List focus={focus} onClick={onClick}>
-              만기
-            </List>
+            <List onClick={onClick}>유효</List>
+            <List onClick={onClick}>만기예정</List>
+            <List onClick={onClick}>만기</List>
           </Wrapper>
         </Block>
         <Block />
