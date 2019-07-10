@@ -85,6 +85,10 @@ export default () => {
     setFilter(filtered);
   };
 
+  const handleReset = e => {
+    setFilter([]);
+  };
+
   return (
     <Container>
       <BlockContainer>
@@ -106,7 +110,11 @@ export default () => {
         </BlockWrapper>
         <Search />
       </BlockContainer>
-      <Filtered filter={filter} handleDelete={handleDelete} />
+      <Filtered
+        filter={filter}
+        handleDelete={handleDelete}
+        handleReset={handleReset}
+      />
     </Container>
   );
 };

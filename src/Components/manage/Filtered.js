@@ -10,6 +10,7 @@ const Container = styled.div`
   display: grid;
   padding: 20px 30px;
   grid-template-columns: 1fr 5fr;
+  position: relative;
 `;
 
 const Element = styled.div``;
@@ -29,9 +30,25 @@ const Button = styled.button`
   all: unset;
   cursor: pointer;
   margin-left: 5px;
+  font-size: 14px;
+  vertical-align: center;
 `;
 
-export default ({ filter, handleDelete }) => {
+const Reset = styled.button`
+  all: unset;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #2e5bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+`;
+
+export default ({ filter, handleDelete, handleReset }) => {
   return (
     <Container>
       <Element>전체 2000건</Element>
@@ -45,6 +62,7 @@ export default ({ filter, handleDelete }) => {
           </Item>
         ))}
       </ItemWrapper>
+      <Reset onClick={handleReset}>초기화</Reset>
     </Container>
   );
 };
