@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { userData } from "../../data";
 import ManagePresenter from "./ManagePresenter";
 import useInput from "../../Hooks/useInput";
+import { useFilter } from "../../Context/UserContext";
 
 export default () => {
-  const [data, setData] = useState();
+  const { data } = useFilter();
   const [userDetail, setUserDetail] = useState([userData[0]]);
   const [loading, setLoading] = useState(true);
   const [action, setAction] = useState({
@@ -54,7 +55,6 @@ export default () => {
     setLoading(false);
   };
   useEffect(() => {
-    setData(userData);
     setLoading(false);
   }, []);
 

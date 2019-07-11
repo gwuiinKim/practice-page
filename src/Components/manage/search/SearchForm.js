@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Filtered from "./Filtered";
-import AgeGender from "./AgeGender";
+import AgeGender from "./ageGender/AgeGender";
 import { useFilter, useFilterFns } from "../../../Context/UserContext";
 import SearchByKey from "./SearchByKey";
 
@@ -62,13 +62,18 @@ const List = styled.li`
 `;
 
 export default () => {
-  const { filter, list1 } = useFilter();
+  const { filter, list1, genderList } = useFilter();
   const {
     onFilterClick,
     handleDeleteFilter,
     handleResetFilter,
-    handleGenderClick
+    handleGenderClick,
+    dataHandler
   } = useFilterFns();
+
+  useEffect(() => {
+    dataHandler(filter);
+  }, [filter]);
 
   return (
     <Container>
@@ -76,7 +81,11 @@ export default () => {
         <BlockWrapper>
           <Block>
             <Title> - 성별·연령</Title>
-            <AgeGender filter={filter} handleGenderClick={handleGenderClick} />
+            <AgeGender
+              filter={filter}
+              genderList={genderList}
+              handleGenderClick={handleGenderClick}
+            />
           </Block>
           <Block>
             <Title> - 회원분류</Title>

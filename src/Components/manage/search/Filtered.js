@@ -54,7 +54,7 @@ export default ({ filter, handleDeleteFilter, handleResetFilter }) => {
       <Element>전체 2000건</Element>
       <ItemWrapper>
         {filter.map(el => (
-          <Item>
+          <Item key={el}>
             {el}
             <Button data-value={el} onClick={handleDeleteFilter}>
               x

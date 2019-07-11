@@ -1,4 +1,5 @@
 import React, { useState, useContext, createContext } from "react";
+import { userData } from "../data";
 
 const UserContext = createContext();
 
@@ -23,9 +24,10 @@ const UserContextProvider = ({ children }) => {
   };
 
   // about serach filter
-
+  const [data, setData] = useState([]);
   const [filter, setFilter] = useState([]);
   const list1 = ["유효", "만기예정", "만기"];
+  const genderList = ["남", "여"];
 
   const onFilterClick = e => {
     const {
@@ -67,6 +69,23 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
+  const dataHandler = filter => {
+    // todo : get data from db
+    let filteredList = userData;
+    filter.forEach(filter => {
+      if (filter === "유효") {
+        filteredList = filteredList.filter(user => user.remains > 0);
+      } else if (filter === "만기예정") {
+        filteredList = filteredList.filter(
+          user => user.remains > 0 && user.remains <= 5
+        );
+      } else if (filter === "만기") {
+        filteredList = filteredList.filter(user => user.remains === 0);
+      }
+    });
+    setData(filteredList);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -75,13 +94,16 @@ const UserContextProvider = ({ children }) => {
           logUserIn,
           logUserOut
         },
+        data,
         filter,
         list1,
+        genderList,
         filterFns: {
           onFilterClick,
           handleDeleteFilter,
           handleResetFilter,
-          handleGenderClick
+          handleGenderClick,
+          dataHandler
         }
       }}
     >
@@ -101,8 +123,8 @@ export const useUserFns = () => {
 };
 
 export const useFilter = () => {
-  const { filter, list1 } = useContext(UserContext);
-  return { filter, list1 };
+  const { data, filter, list1, genderList } = useContext(UserContext);
+  return { data, filter, list1, genderList };
 };
 
 export const useFilterFns = () => {
