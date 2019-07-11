@@ -48,10 +48,10 @@ const Reset = styled.button`
   border-radius: 5px;
 `;
 
-export default ({ filter, handleDeleteFilter, handleResetFilter }) => {
+export default ({ data, filter, handleDeleteFilter, handleResetFilter }) => {
   return (
     <Container>
-      <Element>전체 2000건</Element>
+      <Element>전체 {data.length}건</Element>
       <ItemWrapper>
         {filter.map(el => (
           <Item key={el}>

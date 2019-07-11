@@ -4,6 +4,7 @@ import Filtered from "./Filtered";
 import AgeGender from "./ageGender/AgeGender";
 import { useFilter, useFilterFns } from "../../../Context/UserContext";
 import SearchByKey from "./SearchByKey";
+import Customer from "./Customer";
 
 const Container = styled.div`
   width: 1250px;
@@ -44,25 +45,8 @@ const Title = styled.p`
   padding: 10px 15px;
 `;
 
-const Wrapper = styled.ul`
-  display: flex;
-  flex-direction: column;
-`;
-
-const List = styled.li`
-  all: unset;
-  cursor: pointer;
-  user-select: none;
-  padding: 10px 20px;
-  font-size: 15px;
-  ${props =>
-    props.current &&
-    `background-color:${props.theme.blueColor};
-  color:white`}
-`;
-
 export default () => {
-  const { filter, list1, genderList } = useFilter();
+  const { data, filter, list1, genderList } = useFilter();
   const {
     onFilterClick,
     handleDeleteFilter,
@@ -89,17 +73,11 @@ export default () => {
           </Block>
           <Block>
             <Title> - 회원분류</Title>
-            <Wrapper>
-              {list1.map(el => (
-                <List
-                  onClick={onFilterClick}
-                  current={filter.includes(el)}
-                  key={el}
-                >
-                  {el}
-                </List>
-              ))}
-            </Wrapper>
+            <Customer
+              list1={list1}
+              filter={filter}
+              onFilterClick={onFilterClick}
+            />
           </Block>
           <Block />
           <Block />
@@ -108,6 +86,7 @@ export default () => {
         <SearchByKey />
       </BlockContainer>
       <Filtered
+        data={data}
         filter={filter}
         handleDeleteFilter={handleDeleteFilter}
         handleResetFilter={handleResetFilter}
