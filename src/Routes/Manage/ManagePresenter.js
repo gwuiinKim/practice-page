@@ -4,7 +4,7 @@ import User from "../../Components/manage/User";
 import Filter from "../../Components/manage/Filter";
 import UserDetail from "../../Components/manage/UserDetail";
 import Register from "../../Components/manage/Register";
-import SearchForm from "../../Components/manage/SearchForm";
+import SearchForm from "../../Components/manage/search/SearchForm";
 
 const Container = styled.div`
   padding-top: 80px;

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Search from "./Search";
 import Filtered from "./Filtered";
 import AgeGender from "./AgeGender";
-import { useFilter, useFilterFns } from "../../Context/UserContext";
+import { useFilter, useFilterFns } from "../../../Context/UserContext";
+import SearchByKey from "./SearchByKey";
 
 const Container = styled.div`
   width: 1250px;
@@ -63,7 +63,11 @@ const List = styled.li`
 
 export default () => {
   const { filter, list1 } = useFilter();
-  const { onFilterClick, handleDeleteFilter, handleResetFilter } = useFilterFns;
+  const {
+    onFilterClick,
+    handleDeleteFilter,
+    handleResetFilter
+  } = useFilterFns();
 
   return (
     <Container>
@@ -87,7 +91,7 @@ export default () => {
           <Block />
           <Block />
         </BlockWrapper>
-        <Search />
+        <SearchByKey />
       </BlockContainer>
       <Filtered
         filter={filter}

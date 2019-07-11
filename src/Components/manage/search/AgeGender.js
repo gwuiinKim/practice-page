@@ -25,8 +25,6 @@ const CheckBox = styled.input`
   display: none;
 `;
 
-const Box = styled.div``;
-
 export default () => {
   return (
     <Container>
