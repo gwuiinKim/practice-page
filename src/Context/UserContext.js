@@ -53,6 +53,20 @@ const UserContextProvider = ({ children }) => {
     setFilter([]);
   };
 
+  const handleGenderClick = e => {
+    const {
+      target: {
+        dataset: { value }
+      }
+    } = e;
+    if (filter.includes(value)) {
+      const filtered = filter.filter(el => el !== value);
+      setFilter(filtered);
+    } else {
+      setFilter([...filter, value]);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -66,7 +80,8 @@ const UserContextProvider = ({ children }) => {
         filterFns: {
           onFilterClick,
           handleDeleteFilter,
-          handleResetFilter
+          handleResetFilter,
+          handleGenderClick
         }
       }}
     >

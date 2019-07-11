@@ -66,7 +66,8 @@ export default () => {
   const {
     onFilterClick,
     handleDeleteFilter,
-    handleResetFilter
+    handleResetFilter,
+    handleGenderClick
   } = useFilterFns();
 
   return (
@@ -75,13 +76,17 @@ export default () => {
         <BlockWrapper>
           <Block>
             <Title> - 성별·연령</Title>
-            <AgeGender />
+            <AgeGender filter={filter} handleGenderClick={handleGenderClick} />
           </Block>
           <Block>
             <Title> - 회원분류</Title>
             <Wrapper>
               {list1.map(el => (
-                <List onClick={onFilterClick} current={filter.includes(el)}>
+                <List
+                  onClick={onFilterClick}
+                  current={filter.includes(el)}
+                  key={el}
+                >
                   {el}
                 </List>
               ))}

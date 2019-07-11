@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -10,34 +10,44 @@ const Container = styled.div`
 const Column = styled.div`
   width: 100%;
 `;
-
-const Label = styled.label`
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #bcbcbc;
-  cursor: pointer;
+const CheckBoxColumn = styled.div`
+  display: flex;
 `;
 
+const CheckBoxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+`;
+const CheckBox = styled.div`
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border: 1px solid
+    ${props => (props.current ? "white" : props.theme.blueColor)};
+  margin-right: 5px;
+  background-color: ${props =>
+    props.current ? props.theme.blueColor : "inherit"};
+`;
 const Content = styled.span``;
 
-const CheckBox = styled.input`
-  display: none;
-`;
+export default ({ filter, handleGenderClick }) => {
+  const genderList = ["남", "여"];
 
-export default () => {
   return (
     <Container>
-      <Column>
-        <Label for="male" />
-        <CheckBox id="male" type="checkBox" />
-        <Content>남</Content>
-
-        <Label for="female">
-          <CheckBox id="female" type="checkBox" />
-          <Content>여</Content>
-        </Label>
-      </Column>
+      <CheckBoxColumn>
+        {genderList.map(el => (
+          <CheckBoxContainer key={el}>
+            <CheckBox
+              onClick={handleGenderClick}
+              data-value={el}
+              current={filter.includes(el)}
+            />
+            <Content>{el}</Content>
+          </CheckBoxContainer>
+        ))}
+      </CheckBoxColumn>
       <Column />
       <Column />
     </Container>
