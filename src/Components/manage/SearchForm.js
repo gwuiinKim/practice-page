@@ -1,7 +1,9 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import Search from "./Search";
 import Filtered from "./Filtered";
+import AgeGender from "./AgeGender";
+import { useFilter, useFilterFns } from "../../Context/UserContext";
 
 const Container = styled.div`
   width: 1250px;
@@ -60,45 +62,22 @@ const List = styled.li`
 `;
 
 export default () => {
-  const [filter, setFilter] = useState([]);
-
-  const onClick = e => {
-    const {
-      target: { innerText }
-    } = e;
-    if (filter.includes(innerText)) {
-      const filtered = filter.filter(el => el !== innerText);
-      setFilter(filtered);
-    } else {
-      setFilter([...filter, innerText]);
-    }
-  };
-  const list = ["유효", "만기예정", "만기"];
-
-  const handleDelete = e => {
-    const {
-      target: {
-        dataset: { value }
-      }
-    } = e;
-    const filtered = filter.filter(el => el !== value);
-    setFilter(filtered);
-  };
-
-  const handleReset = e => {
-    setFilter([]);
-  };
+  const { filter, list1 } = useFilter();
+  const { onFilterClick, handleDeleteFilter, handleResetFilter } = useFilterFns;
 
   return (
     <Container>
       <BlockContainer>
         <BlockWrapper>
-          <Block />
+          <Block>
+            <Title> - 성별·연령</Title>
+            <AgeGender />
+          </Block>
           <Block>
             <Title> - 회원분류</Title>
             <Wrapper>
-              {list.map(el => (
-                <List onClick={onClick} current={filter.includes(el)}>
+              {list1.map(el => (
+                <List onClick={onFilterClick} current={filter.includes(el)}>
                   {el}
                 </List>
               ))}
@@ -112,8 +91,8 @@ export default () => {
       </BlockContainer>
       <Filtered
         filter={filter}
-        handleDelete={handleDelete}
-        handleReset={handleReset}
+        handleDeleteFilter={handleDeleteFilter}
+        handleResetFilter={handleResetFilter}
       />
     </Container>
   );

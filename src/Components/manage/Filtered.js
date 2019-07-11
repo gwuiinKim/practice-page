@@ -48,7 +48,7 @@ const Reset = styled.button`
   border-radius: 5px;
 `;
 
-export default ({ filter, handleDelete, handleReset }) => {
+export default ({ filter, handleDeleteFilter, handleResetFilter }) => {
   return (
     <Container>
       <Element>전체 2000건</Element>
@@ -56,13 +56,13 @@ export default ({ filter, handleDelete, handleReset }) => {
         {filter.map(el => (
           <Item>
             {el}
-            <Button data-value={el} onClick={handleDelete}>
+            <Button data-value={el} onClick={handleDeleteFilter}>
               x
             </Button>
           </Item>
         ))}
       </ItemWrapper>
-      <Reset onClick={handleReset}>초기화</Reset>
+      <Reset onClick={handleResetFilter}>초기화</Reset>
     </Container>
   );
 };
