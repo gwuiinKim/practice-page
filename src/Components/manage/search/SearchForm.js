@@ -52,11 +52,13 @@ export default () => {
     handleDeleteFilter,
     handleResetFilter,
     handleGenderClick,
-    dataHandler
+    dataHandler,
+    handleAddKeyword
   } = useFilterFns();
 
   useEffect(() => {
     dataHandler(filter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
   return (
@@ -83,7 +85,7 @@ export default () => {
           <Block />
           <Block />
         </BlockWrapper>
-        <SearchByKey search={search} />
+        <SearchByKey search={search} handleAddKeyword={handleAddKeyword} />
       </BlockContainer>
       <Filtered
         data={data}

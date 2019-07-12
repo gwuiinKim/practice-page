@@ -38,17 +38,17 @@ const Button = styled.button`
   border-radius: 5px;
 `;
 
-export default ({ search }) => (
+export default ({ search, handleAddKeyword }) => (
   <Container>
     <Column>키워드</Column>
 
     <InputContainer>
       <Input
-        placeholder="search.."
+        placeholder="이름으로 검색하세요"
         value={search.value}
         onChange={search.onChange}
       />
-      <Button>추가</Button>
+      <Button onClick={handleAddKeyword}>추가</Button>
     </InputContainer>
   </Container>
 );

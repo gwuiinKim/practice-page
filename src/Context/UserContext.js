@@ -29,7 +29,7 @@ const UserContextProvider = ({ children }) => {
   const [filter, setFilter] = useState([]);
   const list1 = ["유효", "만기예정", "만기"];
   const genderList = ["남", "여"];
-  const search = useInput();
+  const search = useInput("");
 
   const onFilterClick = e => {
     const {
@@ -71,6 +71,11 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
+  const handleAddKeyword = e => {
+    setFilter([...filter, search.value]);
+    search.setValue("");
+  };
+
   const dataHandler = filter => {
     // todo : get data from db
     let filteredList = userData;
@@ -87,12 +92,12 @@ const UserContextProvider = ({ children }) => {
         filteredList = filteredList.filter(user => user.gender === "남");
       } else if (filter === "여") {
         filteredList = filteredList.filter(user => user.gender === "여");
+      } else {
+        filteredList = filteredList.filter(user => user.name === filter);
       }
     });
     setData(filteredList);
   };
-
-  const handleAddKeyword = e => {};
 
   return (
     <UserContext.Provider
@@ -112,7 +117,8 @@ const UserContextProvider = ({ children }) => {
           handleDeleteFilter,
           handleResetFilter,
           handleGenderClick,
-          dataHandler
+          dataHandler,
+          handleAddKeyword
         }
       }}
     >

@@ -16,8 +16,8 @@ export default () => {
   });
 
   const name = useInput("");
-  const gender = useInput();
-  const phoneNumber = useInput();
+  const gender = useInput("");
+  const phoneNumber = useInput("");
 
   const handleFilterClick = e => {
     setAction({
