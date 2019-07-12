@@ -1,6 +1,7 @@
 import React, { useState, useContext, createContext } from "react";
 import { userData } from "../data";
 import useInput from "../Hooks/useInput";
+import useSelect from "../Hooks/useSelect";
 
 const UserContext = createContext();
 
@@ -27,9 +28,17 @@ const UserContextProvider = ({ children }) => {
   // about serach filter
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState([]);
-  const list1 = ["유효", "만기예정", "만기"];
+  const customerCategoryList = [
+    "유효",
+    "만기",
+    "만기예정(5일)",
+    "만기예정(7일)",
+    "만기예정(10일)"
+  ];
   const genderList = ["남", "여"];
   const search = useInput("");
+
+  const expireSelect = useSelect("");
 
   const checkUniqueness = target => {
     if (filter.includes(target)) {
@@ -91,9 +100,17 @@ const UserContextProvider = ({ children }) => {
     filter.forEach(filter => {
       if (filter === "유효") {
         filteredList = filteredList.filter(user => user.remains > 0);
-      } else if (filter === "만기예정") {
+      } else if (filter === "만기예정(5일)") {
         filteredList = filteredList.filter(
           user => user.remains > 0 && user.remains <= 5
+        );
+      } else if (filter === "만기예정(7일)") {
+        filteredList = filteredList.filter(
+          user => user.remains > 0 && user.remains <= 7
+        );
+      } else if (filter === "만기예정(10일)") {
+        filteredList = filteredList.filter(
+          user => user.remains > 0 && user.remains <= 10
         );
       } else if (filter === "만기") {
         filteredList = filteredList.filter(user => user.remains === 0);
@@ -118,8 +135,9 @@ const UserContextProvider = ({ children }) => {
         },
         data,
         search,
+        expireSelect,
         filter,
-        list1,
+        customerCategoryList,
         genderList,
         filterFns: {
           onFilterClick,
@@ -148,8 +166,22 @@ export const useUserFns = () => {
 };
 
 export const useFilter = () => {
-  const { data, search, filter, list1, genderList } = useContext(UserContext);
-  return { data, search, filter, list1, genderList };
+  const {
+    data,
+    search,
+    expireSelect,
+    filter,
+    customerCategoryList,
+    genderList
+  } = useContext(UserContext);
+  return {
+    data,
+    search,
+    expireSelect,
+    filter,
+    customerCategoryList,
+    genderList
+  };
 };
 
 export const useFilterFns = () => {

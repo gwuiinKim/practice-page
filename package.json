@@ -9,6 +9,7 @@
     "react-onclickoutside": "^6.8.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-select": "^3.0.4",
     "styled-components": "^4.3.2",
     "styled-reset": "^2.0.16",
     "uuid": "^3.3.2"

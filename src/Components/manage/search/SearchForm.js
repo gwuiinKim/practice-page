@@ -4,7 +4,7 @@ import Filtered from "./Filtered";
 import AgeGender from "./ageGender/AgeGender";
 import { useFilter, useFilterFns } from "../../../Context/UserContext";
 import SearchByKey from "./SearchByKey";
-import Customer from "./Customer";
+import Customer from "./customers/Customer";
 
 const Container = styled.div`
   width: 1250px;
@@ -46,7 +46,14 @@ const Title = styled.p`
 `;
 
 export default () => {
-  const { data, search, filter, list1, genderList } = useFilter();
+  const {
+    data,
+    search,
+    expireSelect,
+    filter,
+    customerCategoryList,
+    genderList
+  } = useFilter();
   const {
     onFilterClick,
     handleDeleteFilter,
@@ -75,14 +82,17 @@ export default () => {
             />
           </Block>
           <Block>
-            <Title> - 회원분류</Title>
+            <Title> - 회원권 분류</Title>
             <Customer
-              list1={list1}
               filter={filter}
+              customerCategoryList={customerCategoryList}
               onFilterClick={onFilterClick}
+              expireSelect={expireSelect}
             />
           </Block>
-          <Block />
+          <Block>
+            <Title> - 레슨 분류</Title>
+          </Block>
           <Block />
           <Block />
         </BlockWrapper>
