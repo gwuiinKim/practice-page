@@ -53,7 +53,8 @@ export default () => {
     handleResetFilter,
     handleGenderClick,
     dataHandler,
-    handleAddKeyword
+    handleAddKeyword,
+    handleEnterKeyword
   } = useFilterFns();
 
   useEffect(() => {
@@ -85,7 +86,11 @@ export default () => {
           <Block />
           <Block />
         </BlockWrapper>
-        <SearchByKey search={search} handleAddKeyword={handleAddKeyword} />
+        <SearchByKey
+          search={search}
+          handleAddKeyword={handleAddKeyword}
+          handleEnterKeyword={handleEnterKeyword}
+        />
       </BlockContainer>
       <Filtered
         data={data}

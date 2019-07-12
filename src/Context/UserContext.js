@@ -31,16 +31,20 @@ const UserContextProvider = ({ children }) => {
   const genderList = ["남", "여"];
   const search = useInput("");
 
+  const checkUniqueness = target => {
+    if (filter.includes(target)) {
+      const filtered = filter.filter(el => el !== target);
+      setFilter(filtered);
+    } else {
+      setFilter([...filter, target]);
+    }
+  };
+
   const onFilterClick = e => {
     const {
       target: { innerText }
     } = e;
-    if (filter.includes(innerText)) {
-      const filtered = filter.filter(el => el !== innerText);
-      setFilter(filtered);
-    } else {
-      setFilter([...filter, innerText]);
-    }
+    checkUniqueness(innerText);
   };
 
   const handleDeleteFilter = e => {
@@ -63,17 +67,22 @@ const UserContextProvider = ({ children }) => {
         dataset: { value }
       }
     } = e;
-    if (filter.includes(value)) {
-      const filtered = filter.filter(el => el !== value);
-      setFilter(filtered);
-    } else {
-      setFilter([...filter, value]);
-    }
+    checkUniqueness(value);
   };
 
   const handleAddKeyword = e => {
-    setFilter([...filter, search.value]);
-    search.setValue("");
+    if (search.value !== "") {
+      search.setValue("");
+      if (!filter.includes(search.value)) {
+        setFilter([...filter, search.value]);
+      }
+    }
+  };
+
+  const handleEnterKeyword = e => {
+    if (e.key === "Enter" && search.value !== "") {
+      handleAddKeyword();
+    }
   };
 
   const dataHandler = filter => {
@@ -118,7 +127,8 @@ const UserContextProvider = ({ children }) => {
           handleResetFilter,
           handleGenderClick,
           dataHandler,
-          handleAddKeyword
+          handleAddKeyword,
+          handleEnterKeyword
         }
       }}
     >
