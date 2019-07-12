@@ -37,15 +37,6 @@ const UserTitle = styled.h1`
   font-size: 25px;
 `;
 
-const Search = styled.input`
-  border: none;
-  width: 50%;
-  font-size: 20px;
-  box-shadow: ${props => props.theme.boxShadow};
-  padding: 10px 30px;
-  border-radius: 5px;
-`;
-
 const Button = styled.button`
   all: unset;
   cursor: pointer;
@@ -63,7 +54,6 @@ const ManagePresenter = ({
   loading,
   data,
   action,
-  search,
   userDetail,
   name,
   gender,
@@ -82,14 +72,7 @@ const ManagePresenter = ({
         <Column>
           <HeaderWrapper>
             <UserTitle>User Dashboard</UserTitle>
-            <Search
-              placeholder="search.."
-              value={search.value}
-              onChange={search.onChange}
-            />
-            <div>
-              <Button onClick={handleRegisterClick}>New</Button>
-            </div>
+            <Button onClick={handleRegisterClick}>New</Button>
           </HeaderWrapper>
           {!loading && data && data.length > 0 && (
             <UserWrapper>

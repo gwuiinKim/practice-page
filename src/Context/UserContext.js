@@ -1,5 +1,6 @@
 import React, { useState, useContext, createContext } from "react";
 import { userData } from "../data";
+import useInput from "../Hooks/useInput";
 
 const UserContext = createContext();
 
@@ -28,6 +29,7 @@ const UserContextProvider = ({ children }) => {
   const [filter, setFilter] = useState([]);
   const list1 = ["유효", "만기예정", "만기"];
   const genderList = ["남", "여"];
+  const search = useInput();
 
   const onFilterClick = e => {
     const {
@@ -81,10 +83,16 @@ const UserContextProvider = ({ children }) => {
         );
       } else if (filter === "만기") {
         filteredList = filteredList.filter(user => user.remains === 0);
+      } else if (filter === "남") {
+        filteredList = filteredList.filter(user => user.gender === "남");
+      } else if (filter === "여") {
+        filteredList = filteredList.filter(user => user.gender === "여");
       }
     });
     setData(filteredList);
   };
+
+  const handleAddKeyword = e => {};
 
   return (
     <UserContext.Provider
@@ -95,6 +103,7 @@ const UserContextProvider = ({ children }) => {
           logUserOut
         },
         data,
+        search,
         filter,
         list1,
         genderList,
@@ -123,8 +132,8 @@ export const useUserFns = () => {
 };
 
 export const useFilter = () => {
-  const { data, filter, list1, genderList } = useContext(UserContext);
-  return { data, filter, list1, genderList };
+  const { data, search, filter, list1, genderList } = useContext(UserContext);
+  return { data, search, filter, list1, genderList };
 };
 
 export const useFilterFns = () => {

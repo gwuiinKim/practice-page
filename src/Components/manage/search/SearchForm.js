@@ -46,7 +46,7 @@ const Title = styled.p`
 `;
 
 export default () => {
-  const { data, filter, list1, genderList } = useFilter();
+  const { data, search, filter, list1, genderList } = useFilter();
   const {
     onFilterClick,
     handleDeleteFilter,
@@ -83,7 +83,7 @@ export default () => {
           <Block />
           <Block />
         </BlockWrapper>
-        <SearchByKey />
+        <SearchByKey search={search} />
       </BlockContainer>
       <Filtered
         data={data}

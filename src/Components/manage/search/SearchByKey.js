@@ -15,15 +15,40 @@ const Container = styled.div`
 `;
 
 const Column = styled.div``;
-const Input = styled.input`
-  width: 100%;
+
+const InputContainer = styled.div`
+  display: flex;
 `;
 
-export default () => (
+const Input = styled.input`
+  width: 80%;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #bebebe;
+`;
+
+const Button = styled.button`
+  all: unset;
+  cursor: pointer;
+  background-color: #2e5bff;
+  margin-left: 10px;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+`;
+
+export default ({ search }) => (
   <Container>
     <Column>키워드</Column>
-    <Column>
-      <Input />
-    </Column>
+
+    <InputContainer>
+      <Input
+        placeholder="search.."
+        value={search.value}
+        onChange={search.onChange}
+      />
+      <Button>추가</Button>
+    </InputContainer>
   </Container>
 );

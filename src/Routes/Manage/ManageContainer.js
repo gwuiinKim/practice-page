@@ -14,7 +14,6 @@ export default () => {
     isEdit: false,
     isFilter: true
   });
-  const search = useInput();
 
   const name = useInput("");
   const gender = useInput();
@@ -63,7 +62,6 @@ export default () => {
       data={data}
       loading={loading}
       action={action}
-      search={search}
       name={name}
       gender={gender}
       phoneNumber={phoneNumber}
