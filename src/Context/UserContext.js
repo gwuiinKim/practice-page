@@ -1,7 +1,6 @@
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useContext, createContext, useEffect } from "react";
 import { userData } from "../data";
 import useInput from "../Hooks/useInput";
-import useSelect from "../Hooks/useSelect";
 
 const UserContext = createContext();
 
@@ -38,8 +37,6 @@ const UserContextProvider = ({ children }) => {
   const genderList = ["남", "여"];
   const search = useInput("");
 
-  const expireSelect = useSelect("");
-
   const checkUniqueness = target => {
     if (filter.includes(target)) {
       const filtered = filter.filter(el => el !== target);
@@ -49,13 +46,56 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
-  const onFilterClick = e => {
+  const addToFilterOrNot = target => {
+    if (!filter.includes(target)) {
+      setFilter([...filter, target]);
+    }
+  };
+
+  const useSelect = defaultValue => {
+    const [value, setValue] = useState(defaultValue);
+
+    const onChange = value => {
+      setValue(value);
+      addToFilterOrNot(`만기예정(${value.label})`);
+    };
+    return { value, setValue, onChange };
+  };
+
+  const expireSelect = useSelect(null);
+
+  const handleMembershipClick = async e => {
     const {
       target: { innerText }
     } = e;
+    // const filtered = await filter.filter(el => !el.includes("만기예정"));
+    // await setFilter(filtered);
+    // console.log(filtered);
     checkUniqueness(innerText);
+    // to do 체크한 거랑 목록이랑 연동
+    // 잘 안되네..
+    if (innerText.includes("만기예정")) {
+      const value = innerText.split("만기예정")[1];
+      const regExp = /\(([^)]+)\)/;
+      const matches = regExp.exec(value)[1];
+      // const matchNumber = matches.slice(0, -1);
+      if (
+        filter.length !== 0 &&
+        (!filter.includes("만기예정(5일)") ||
+          !filter.includes("만기예정(7일)") ||
+          !filter.includes("만기예정(10일)"))
+      ) {
+        expireSelect.setValue(null);
+        console.log("working");
+      } else {
+        expireSelect.setValue({ value: matches, label: matches });
+      }
+    }
   };
-
+  useEffect(() => {
+    console.log(filter);
+    console.log(expireSelect);
+  });
   const handleDeleteFilter = e => {
     const {
       target: {
@@ -81,10 +121,8 @@ const UserContextProvider = ({ children }) => {
 
   const handleAddKeyword = e => {
     if (search.value !== "") {
+      addToFilterOrNot(search.value);
       search.setValue("");
-      if (!filter.includes(search.value)) {
-        setFilter([...filter, search.value]);
-      }
     }
   };
 
@@ -140,7 +178,7 @@ const UserContextProvider = ({ children }) => {
         customerCategoryList,
         genderList,
         filterFns: {
-          onFilterClick,
+          handleMembershipClick,
           handleDeleteFilter,
           handleResetFilter,
           handleGenderClick,

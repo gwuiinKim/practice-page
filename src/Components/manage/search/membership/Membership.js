@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Input from "./Input";
+import SelectBar from "./SelecBar";
 
 const Container = styled.div`
   width: 100%;
@@ -28,19 +28,23 @@ color:white`}
 export default ({
   customerCategoryList,
   filter,
-  onFilterClick,
+  handleMembershipClick,
   expireSelect
 }) => {
   return (
     <Container>
       <ListWrapper>
         {customerCategoryList.map(el => (
-          <List onClick={onFilterClick} current={filter.includes(el)} key={el}>
+          <List
+            onClick={handleMembershipClick}
+            current={filter.includes(el)}
+            key={el}
+          >
             {el}
           </List>
         ))}
       </ListWrapper>
-      <Input expireSelect={expireSelect} />
+      <SelectBar expireSelect={expireSelect} />
     </Container>
   );
 };

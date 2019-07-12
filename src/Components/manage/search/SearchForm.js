@@ -4,7 +4,7 @@ import Filtered from "./Filtered";
 import AgeGender from "./ageGender/AgeGender";
 import { useFilter, useFilterFns } from "../../../Context/UserContext";
 import SearchByKey from "./SearchByKey";
-import Customer from "./customers/Customer";
+import Membership from "./membership/Membership";
 
 const Container = styled.div`
   width: 1250px;
@@ -55,7 +55,7 @@ export default () => {
     genderList
   } = useFilter();
   const {
-    onFilterClick,
+    handleMembershipClick,
     handleDeleteFilter,
     handleResetFilter,
     handleGenderClick,
@@ -83,10 +83,10 @@ export default () => {
           </Block>
           <Block>
             <Title> - 회원권 분류</Title>
-            <Customer
+            <Membership
               filter={filter}
               customerCategoryList={customerCategoryList}
-              onFilterClick={onFilterClick}
+              handleMembershipClick={handleMembershipClick}
               expireSelect={expireSelect}
             />
           </Block>

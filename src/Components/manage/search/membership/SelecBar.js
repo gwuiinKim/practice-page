@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Select from "react-select";
-import { number } from "prop-types";
 
 const Container = styled.div`
   width: 100%;
@@ -46,7 +45,7 @@ const options = [];
 
 const generator = () => {
   numberArray.map(number =>
-    options.push({ value: number, label: `${number}일` })
+    options.push({ value: `${number}일`, label: `${number}일` })
   );
 };
 generator();
