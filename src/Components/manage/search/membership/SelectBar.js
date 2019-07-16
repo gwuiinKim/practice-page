@@ -54,14 +54,18 @@ export default ({ expireSelect }) => {
   return (
     <Container>
       <Select
-        theme={theme => ({
-          ...theme,
-          borderRadius: 3
-        })}
         placeholder="만기예정일 선택"
         value={expireSelect.value}
         onChange={expireSelect.onChange}
         options={options}
+        styles={{
+          control: (base, state) => ({
+            ...base,
+            "&:hover": { borderColor: "#3897F0" }, // border style on hover
+            border: "1px solid #3897F0", // default border color
+            boxShadow: "none" // no box-shadow,
+          })
+        }}
       />
     </Container>
   );

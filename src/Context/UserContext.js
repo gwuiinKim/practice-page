@@ -1,6 +1,8 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
 import { userData } from "../data";
 import useInput from "../Hooks/useInput";
+import useSelect from "../Hooks/useSelect";
+import { customerCategoryList, genderList } from "./searchBlockList";
 
 const UserContext = createContext();
 
@@ -27,14 +29,6 @@ const UserContextProvider = ({ children }) => {
   // about serach filter
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState([]);
-  const customerCategoryList = [
-    "유효",
-    "만기",
-    "만기예정(5일)",
-    "만기예정(7일)",
-    "만기예정(10일)"
-  ];
-  const genderList = ["남", "여"];
   const search = useInput("");
 
   const checkUniqueness = target => {
@@ -52,50 +46,39 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
-  const useSelect = defaultValue => {
-    const [value, setValue] = useState(defaultValue);
+  const expireSelect = useSelect(null, addToFilterOrNot);
 
-    const onChange = value => {
-      setValue(value);
-      addToFilterOrNot(`만기예정(${value.label})`);
-    };
-    return { value, setValue, onChange };
+  const uniqueMembershipSelect = () => {
+    const membershipSelected = filter.filter(el => el.includes("만기예정"));
+    if (membershipSelected.length > 1) {
+      membershipSelected.shift();
+    }
   };
-
-  const expireSelect = useSelect(null);
 
   const handleMembershipClick = async e => {
     const {
       target: { innerText }
     } = e;
-    // const filtered = await filter.filter(el => !el.includes("만기예정"));
-    // await setFilter(filtered);
-    // console.log(filtered);
-    checkUniqueness(innerText);
-    // to do 체크한 거랑 목록이랑 연동
-    // 잘 안되네..
+
     if (innerText.includes("만기예정")) {
+      await uniqueMembershipSelect();
       const value = innerText.split("만기예정")[1];
       const regExp = /\(([^)]+)\)/;
       const matches = regExp.exec(value)[1];
-      // const matchNumber = matches.slice(0, -1);
       if (
-        filter.length !== 0 &&
-        (!filter.includes("만기예정(5일)") ||
-          !filter.includes("만기예정(7일)") ||
-          !filter.includes("만기예정(10일)"))
+        !filter.includes("만기예정(5일)") ||
+        !filter.includes("만기예정(7일)") ||
+        !filter.includes("만기예정(10일)")
       ) {
-        expireSelect.setValue(null);
-        console.log("working");
-      } else {
         expireSelect.setValue({ value: matches, label: matches });
+      } else {
+        expireSelect.setValue(null);
       }
     }
+    checkUniqueness(innerText);
   };
-  useEffect(() => {
-    console.log(filter);
-    console.log(expireSelect);
-  });
+
+  useEffect(() => {});
   const handleDeleteFilter = e => {
     const {
       target: {

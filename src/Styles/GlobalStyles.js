@@ -25,6 +25,6 @@ export default createGlobalStyle`
         text-decoration:none;
     }
     input{
-        outline:none;
+        outline:#E0E6F7;
     }
 `;

@@ -30,7 +30,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
   }
-  select {
+  /* select {
     width: 100%;
     padding: 15px 20px;
     background-color: white;
@@ -40,7 +40,7 @@ const Wrapper = styled.div`
     option {
       color: black;
     }
-  }
+  } */
 `;
 
 const Img = styled.img`

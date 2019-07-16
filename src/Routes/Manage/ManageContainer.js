@@ -10,7 +10,7 @@ export default () => {
   const [loading, setLoading] = useState(true);
   const [action, setAction] = useState({
     isDetail: false,
-    isRegister: false,
+    isRegister: true,
     isEdit: false,
     isFilter: true
   });

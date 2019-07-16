@@ -18,6 +18,7 @@ const Column = styled.div``;
 
 const InputContainer = styled.div`
   display: flex;
+  width: 400px;
 `;
 
 const Input = styled.input`
@@ -30,11 +31,13 @@ const Input = styled.input`
 
 const Button = styled.button`
   all: unset;
+  width: auto;
   cursor: pointer;
+  font-size: 14px;
   background-color: #2e5bff;
   margin-left: 10px;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 20px;
   border-radius: 5px;
 `;
 

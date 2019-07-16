@@ -44,7 +44,7 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   padding: 10px 20px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   border-radius: 5px;
   background-color: #2e5bff;
@@ -73,6 +73,7 @@ const UserDetail = ({ userDetail, handleModifyClick }) => {
     gender,
     url,
     isPt,
+    remains,
     phoneNumber,
     membership
   } = userDetail[0];
@@ -86,15 +87,19 @@ const UserDetail = ({ userDetail, handleModifyClick }) => {
       </Column>
       <Column>
         <CategoryWrapper>
-          <Cateogry>membership</Cateogry>
+          <Cateogry>회원권</Cateogry>
           <Content>{membership}</Content>
         </CategoryWrapper>
         <CategoryWrapper>
-          <Cateogry>phoneNumber</Cateogry>
+          <Cateogry>잔여일수</Cateogry>
+          <Content>{remains}일</Content>
+        </CategoryWrapper>
+        <CategoryWrapper>
+          <Cateogry>휴대폰 번호</Cateogry>
           <Content>{phoneNumber}</Content>
         </CategoryWrapper>
         <CategoryWrapper>
-          <Cateogry>gender</Cateogry>
+          <Cateogry>성별</Cateogry>
           <Content>{gender}</Content>
         </CategoryWrapper>
       </Column>

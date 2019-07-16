@@ -12,11 +12,12 @@ const Sidebar = styled.nav`
   padding-top: 90px;
   width: 160px;
   z-index: 10;
-  border-right: ${props => props.theme.border};
+  /* border-right: ${props => props.theme.border}; */
   display: flex;
   flex-direction: column;
   align-items: center;
   color: black;
+  box-shadow: ${props => props.theme.boxShadow};
   svg {
     cursor: pointer;
     margin-bottom: 50px;

@@ -7,7 +7,7 @@ import Register from "../../Components/manage/Register";
 import SearchForm from "../../Components/manage/search/SearchForm";
 
 const Container = styled.div`
-  padding-top: 80px;
+  padding-top: 20px;
   padding-left: 200px;
   padding-right: 100px;
   width: 100%;
@@ -71,8 +71,8 @@ const ManagePresenter = ({
       <Container>
         <Column>
           <HeaderWrapper>
-            <UserTitle>User Dashboard</UserTitle>
-            <Button onClick={handleRegisterClick}>New</Button>
+            <UserTitle>회원 목록</UserTitle>
+            <Button onClick={handleRegisterClick}>신규회원</Button>
           </HeaderWrapper>
           {!loading && data && data.length > 0 && (
             <UserWrapper>
