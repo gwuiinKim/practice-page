@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Select from "react-select";
+import { genderOptions, membeshipOptions } from "../selectBoxList";
 
 const Container = styled.div`
   position: absolute;
@@ -75,10 +77,19 @@ const Name = styled.p`
 const Input = styled.input`
   width: 100%;
   padding: 15px 20px;
-  border: ${props => props.theme.blueBorder};
+  /* border: ${props => props.theme.blueBorder}; */
+  border: 1px solid #3897F0;
+  border-radius:4px;
 `;
 
-const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
+const UserDetail = ({
+  name,
+  gender,
+  membership,
+  phoneNumber,
+  isEdit,
+  userDetail
+}) => {
   const {
     name: aName,
     url: aUrl,
@@ -91,6 +102,17 @@ const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
   // input required 자바스크립트코드
   // button 제출 event handler
   // 사진 찍기
+
+  const selectStyle = {
+    control: (base, state) => ({
+      ...base,
+      "&:hover": { borderColor: "#3897F0" }, // border style on hover
+      border: "1px solid #3897F0", // default border color
+      boxShadow: "none", // no box-shadow,
+      padding: "5px 10px",
+      fontSize: "14px"
+    })
+  };
 
   return (
     <Container>
@@ -111,11 +133,13 @@ const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
         </Wrapper>
         <Wrapper>
           <Name>성별(*)</Name>
-          <select id="gender-select">
-            <option value="">--성별을 선택해주세요--</option>
-            <option value="male">남자</option>
-            <option value="female">여자</option>
-          </select>
+          <Select
+            placeholder="성별 선택"
+            value={gender.value}
+            onChange={gender.onChange}
+            options={genderOptions}
+            styles={selectStyle}
+          />
         </Wrapper>
         <Wrapper>
           <Name>핸드폰번호(*)</Name>
@@ -127,13 +151,13 @@ const UserDetail = ({ name, gender, phoneNumber, isEdit, userDetail }) => {
         </Wrapper>
         <Wrapper>
           <Name>회원권</Name>
-          <select id="gender-select">
-            <option value="">--회원권을 선택해주세요--</option>
-            <option value="male">1개월</option>
-            <option value="female">3개월</option>
-            <option value="female">6개월</option>
-            <option value="female">12개월</option>
-          </select>
+          <Select
+            placeholder="회원권 선택"
+            value={membership.value}
+            onChange={membership.onChange}
+            options={membeshipOptions}
+            styles={selectStyle}
+          />
         </Wrapper>
         <Button>등록하기</Button>
       </Column>

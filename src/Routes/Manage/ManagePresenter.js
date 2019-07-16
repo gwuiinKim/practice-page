@@ -57,6 +57,7 @@ const ManagePresenter = ({
   userDetail,
   name,
   gender,
+  membership,
   phoneNumber,
   handleUserClick,
   handleFilterClick,
@@ -97,8 +98,9 @@ const ManagePresenter = ({
           {!loading && isRegister && (
             <Register
               name={name}
-              gender={gender}
               phoneNumber={phoneNumber}
+              gender={gender}
+              membership={membership}
               isEdit={isEdit}
               userDetail={userDetail}
             />

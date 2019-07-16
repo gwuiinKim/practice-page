@@ -3,6 +3,7 @@ import { userData } from "../../data";
 import ManagePresenter from "./ManagePresenter";
 import useInput from "../../Hooks/useInput";
 import { useFilter } from "../../Context/UserContext";
+import useSelect from "../../Hooks/useSelect";
 
 export default () => {
   const { data } = useFilter();
@@ -16,7 +17,8 @@ export default () => {
   });
 
   const name = useInput("");
-  const gender = useInput("");
+  const gender = useSelect(null);
+  const membership = useSelect(null);
   const phoneNumber = useInput("");
 
   const handleFilterClick = e => {
@@ -64,6 +66,7 @@ export default () => {
       action={action}
       name={name}
       gender={gender}
+      membership={membership}
       phoneNumber={phoneNumber}
       userDetail={userDetail}
       handleUserClick={handleUserClick}
