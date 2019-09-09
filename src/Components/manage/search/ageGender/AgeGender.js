@@ -10,10 +10,6 @@ const Container = styled.div`
   padding: 15px 15px 25px;
 `;
 
-const Column = styled.div`
-  width: 100%;
-`;
-
 export default ({ filter, handleGenderClick, genderList }) => {
   return (
     <Container>

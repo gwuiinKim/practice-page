@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { HomeIcon, PeopleIcon, StatisticsIcon } from "./Icons";
+import { HomeIcon, StatisticsIcon } from "./Icons";
 
 const Sidebar = styled.nav`
   left: 0px;

@@ -67,16 +67,7 @@ const Content = styled.p`
 `;
 
 const UserDetail = ({ userDetail, handleModifyClick }) => {
-  const {
-    id,
-    name,
-    gender,
-    url,
-    isPt,
-    remains,
-    phoneNumber,
-    membership
-  } = userDetail[0];
+  const { name, gender, url, remains, phoneNumber, membership } = userDetail[0];
 
   return (
     <Container>

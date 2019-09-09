@@ -90,13 +90,7 @@ const UserDetail = ({
   isEdit,
   userDetail
 }) => {
-  const {
-    name: aName,
-    url: aUrl,
-    gender: aGender,
-    phoneNumber: aPhoneNumber,
-    membership: aMembership
-  } = userDetail[0];
+  const { url: aUrl } = userDetail[0];
 
   // 할일
   // input required 자바스크립트코드
